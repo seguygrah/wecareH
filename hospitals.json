@@ -1,0 +1,52 @@
+[
+    {
+      "name": "Hospital A",
+      "insuranceNos": ["INS001", "INS002", "INS003"],
+      "doctorIds": ["DOC001", "DOC002"]
+    },
+    {
+      "name": "Hospital B",
+      "insuranceNos": ["INS002", "INS004"],
+      "doctorIds": ["DOC002", "DOC003"]
+    },
+    {
+      "name": "Hospital C",
+      "insuranceNos": ["INS001", "INS003"],
+      "doctorIds": ["DOC001", "DOC003"]
+    },
+    {
+      "name": "Hospital D",
+      "insuranceNos": ["INS005"],
+      "doctorIds": ["DOC001", "DOC002", "DOC003"]
+    },
+    {
+      "name": "Hospital E",
+      "insuranceNos": ["INS001", "INS004"],
+      "doctorIds": ["DOC003"]
+    },
+    {
+      "name": "Hospital F",
+      "insuranceNos": ["INS002"],
+      "doctorIds": ["DOC002"]
+    },
+    {
+      "name": "Hospital G",
+      "insuranceNos": ["INS003"],
+      "doctorIds": ["DOC001", "DOC002"]
+    },
+    {
+      "name": "Hospital H",
+      "insuranceNos": ["INS003", "INS004"],
+      "doctorIds": ["DOC003"]
+    },
+    {
+      "name": "Hospital I",
+      "insuranceNos": ["INS001", "INS004"],
+      "doctorIds": ["DOC001"]
+    },
+    {
+      "name": "Hospital J",
+      "insuranceNos": ["INS001", "INS002", "INS003", "INS004"],
+      "doctorIds": ["DOC001", "DOC002", "DOC003"]
+    }
+  ]

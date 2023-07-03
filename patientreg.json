@@ -1,0 +1,35 @@
+{
+    "patients": [
+      {
+        "name": "John Doe",
+        "insurance_number": "INS001",
+        "number": "1234567890",
+        "email": "johndoe@example.com",
+        "password": "password123",
+        "medical_records": [
+          {
+            "hospital": "Hospital A",
+            "record": "medical_record_A.pdf"
+          },
+          {
+            "hospital": "Hospital B",
+            "record": "medical_record_B.pdf"
+          }
+        ]
+      },
+      {
+        "name": "Jane Smith",
+        "insurance_number": "INS002",
+        "number": "9876543210",
+        "email": "janesmith@example.com",
+        "password": "password456",
+        "medical_records": [
+          {
+            "hospital": "Hospital C",
+            "record": "medical_record_C.pdf"
+          }
+        ]
+      }
+    ]
+  }
+  
