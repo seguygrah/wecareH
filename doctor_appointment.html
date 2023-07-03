@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Doctor Appointment</title>
+  <style>
+    body {
+  font-family: Arial, sans-serif;
+  background-color: #fff;
+  padding: 20px;
+  text-align: center;
+  position: relative;
+}
+
+h2 {
+  margin-bottom: 30px;
+  color: #084a28;
+  background: linear-gradient(to right, #001f3f, #87CEEB);
+  padding: 10px;
+  border-radius: 10px;
+  animation: gradientAnimation 5s infinite;
+  background-size: 200% 200%;
+}
+
+@keyframes gradientAnimation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+form {
+  margin-top: 30px;
+}
+
+label {
+  display: block;
+  margin-bottom: 10px;
+  color: #491010;
+  font-weight: bold;
+  text-align: left;
+}
+
+input[type="text"],
+input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  margin-bottom: 20px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+}
+
+.error-message {
+  color: red;
+}
+
+button[type="submit"],
+button {
+  padding: 8px 20px;
+  font-size: 16px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 10px;
+  background-color: #001f3f;
+  color: #fff;
+}
+
+button:hover {
+  background-color: #186abd;
+}
+
+#appointmentList {
+  margin-top: 30px;
+}
+
+#appointmentList ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+#appointmentList li {
+  margin-bottom: 10px;
+}
+
+.btn-back {
+  margin-left: 10px;
+  background-color: #001f3f;
+  color: #fff;
+}
+
+  </style>
+</head>
+<body>
+  <h2>Doctor Appointment</h2>
+
+  <!-- Doctor login form -->
+  <form id="doctorLoginForm">
+    <div>
+      <label for="doctorId">Doctor ID:</label>
+      <input type="text" id="doctorId" name="doctorId">
+    </div>
+    <div>
+      <label for="hospitalName">Hospital Name:</label>
+      <input type="text" id="hospitalName" name="hospitalName">
+    </div>
+    <div>
+      <!-- View appointments -->
+      <button type="button" onclick="viewAppointments()">View Appointments</button>
+      <!-- Back button -->
+      <button class="btn-back" onclick="goBack()">Back</button>
+    </div>
+  </form>
+
+  <!-- Appointment list -->
+  <div id="appointmentList"></div>
+
+  <script>
+    function viewAppointments() {
+      const doctorId = document.getElementById('doctorId').value;
+      const hospitalName = document.getElementById('hospitalName').value;
+
+      // Retrieve booked appointments from local storage
+      const bookedAppointments = JSON.parse(localStorage.getItem('bookedAppointments')) || [];
+
+      // Filter appointments based on the provided doctor ID and hospital name
+      const filteredAppointments = bookedAppointments.filter(appointment =>
+         appointment.hospital === hospitalName
+      );
+
+      // Display the filtered appointments
+      const appointmentList = document.getElementById('appointmentList');
+      appointmentList.innerHTML = '';
+
+      if (filteredAppointments.length > 0) {
+        const ul = document.createElement('ul');
+
+        filteredAppointments.forEach(appointment => {
+          const li = document.createElement('li');
+          li.textContent = `Time: ${appointment.time}, Insurance Number: ${appointment.insuranceNumber}`;
+          ul.appendChild(li);
+        });
+
+        appointmentList.appendChild(ul);
+      } else {
+        appointmentList.textContent = 'No appointments found for the provided doctor ID and hospital name.';
+      }
+    }
+
+    function goBack() {
+        window.location.href = "doctor_page.html";
+  }
+  </script>
+</body>
+</html>

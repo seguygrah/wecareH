@@ -4,8 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Booking Page</title>
+
+  <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+
+  <!-- Custom Styles -->
   <style>
+    /* Body styles */
     body {
       font-family: Arial, sans-serif;
       background-color: #fff;
@@ -14,6 +19,7 @@
       position: relative;
     }
 
+    /* Heading styles */
     h2 {
       margin-bottom: 30px;
       color: #084a28;
@@ -24,6 +30,7 @@
       background-size: 200% 200%;
     }
 
+    /* Animation for the heading gradient */
     @keyframes gradientAnimation {
       0% {
         background-position: 0% 50%;
@@ -36,10 +43,12 @@
       }
     }
 
+    /* Form styles */
     form {
       margin-top: 30px;
     }
 
+    /* Form group styles */
     .form-group {
       display: flex;
       align-items: center;
@@ -47,6 +56,7 @@
       margin-bottom: 15px;
     }
 
+    /* Label styles */
     .form-group label {
       width: 120px;
       text-align: right;
@@ -54,6 +64,7 @@
       font-weight: bold;
     }
 
+    /* Select input styles */
     .form-group select {
       flex-grow: 1;
       padding: 5px;
@@ -61,6 +72,7 @@
       border: 1px solid #ccc;
     }
 
+    /* Button styles */
     .btn {
       padding: 8px 20px;
       font-size: 16px;
@@ -70,16 +82,19 @@
       margin-right: 10px;
     }
 
+    /* Primary button styles */
     .btn-primary {
       background-color: #001f3f;
       color: #fff;
       border: none;
     }
 
+    /* Hover styles for primary button */
     .btn-primary:hover {
       background-color: #87CEEB;
     }
 
+    /* Booking calendar styles */
     .booking-calendar {
       display: flex;
       flex-wrap: wrap;
@@ -87,6 +102,7 @@
       margin-top: 30px;
     }
 
+    /* Day styles */
     .day {
       padding: 10px;
       margin: 5px;
@@ -95,11 +111,13 @@
       transition: background-color 0.3s ease;
     }
 
+    /* Selected day styles */
     .day.selected {
       background-color: #87CEEB;
       color: #fff;
     }
 
+    /* Disabled day styles */
     .day.disabled {
       background-color: #ccc;
       color: #888;
@@ -108,6 +126,7 @@
   </style>
 </head>
 <body>
+  <!-- Heading -->
   <h2>Booking Page</h2>
 
   <!-- Booking form -->
@@ -143,23 +162,30 @@
       </select>
     </div>
     <div class="form-group">
-        <button type="button" class="btn btn-primary" onclick="goBack()">Back</button>
+      <!-- Back button -->
+      <button type="button" class="btn btn-primary" onclick="goBack()">Back</button>
+      
+      <!-- Book button -->
       <button type="button" class="btn btn-primary" onclick="bookAppointment()">Book</button>
-    
     </div>
   </form>
 
+  <!-- JavaScript code -->
   <script>
-     function goBack() {
+    // Function to go back to the "patient_page.html" page
+    function goBack() {
       window.location.href = "patient_page.html";
     }
 
+    // Retrieve booked appointments from local storage
     const bookedAppointments = JSON.parse(localStorage.getItem('bookedAppointments')) || [];
 
+    // Check if an appointment is already booked for the given date and hospital
     function isAppointmentBooked(date, hospital) {
       return bookedAppointments.some(appointment => appointment.date === date && appointment.hospital === hospital);
     }
 
+    // Function to book an appointment
     function bookAppointment() {
       const insuranceNumber = document.getElementById('insuranceNumber').value;
       const hospital = document.getElementById('hospital').value;
