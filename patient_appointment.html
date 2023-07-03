@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Booking Page</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #fff;
+      padding: 20px;
+      text-align: center;
+      position: relative;
+    }
+
+    h2 {
+      margin-bottom: 30px;
+      color: #084a28;
+      background: linear-gradient(to right, #001f3f, #87CEEB);
+      padding: 10px;
+      border-radius: 10px;
+      animation: gradientAnimation 5s infinite;
+      background-size: 200% 200%;
+    }
+
+    @keyframes gradientAnimation {
+      0% {
+        background-position: 0% 50%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+
+    form {
+      margin-top: 30px;
+    }
+
+    .form-group {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 15px;
+    }
+
+    .form-group label {
+      width: 120px;
+      text-align: right;
+      margin-right: 15px;
+      font-weight: bold;
+    }
+
+    .form-group select {
+      flex-grow: 1;
+      padding: 5px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    .btn {
+      padding: 8px 20px;
+      font-size: 16px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      margin-right: 10px;
+    }
+
+    .btn-primary {
+      background-color: #001f3f;
+      color: #fff;
+      border: none;
+    }
+
+    .btn-primary:hover {
+      background-color: #87CEEB;
+    }
+
+    .booking-calendar {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 30px;
+    }
+
+    .day {
+      padding: 10px;
+      margin: 5px;
+      cursor: pointer;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
+    }
+
+    .day.selected {
+      background-color: #87CEEB;
+      color: #fff;
+    }
+
+    .day.disabled {
+      background-color: #ccc;
+      color: #888;
+      cursor: not-allowed;
+    }
+  </style>
+</head>
+<body>
+  <h2>Booking Page</h2>
+
+  <!-- Booking form -->
+  <form id="bookingForm">
+    <div class="form-group">
+      <label for="insuranceNumber">Insurance Number:</label>
+      <input type="text" id="insuranceNumber" name="insuranceNumber">
+    </div>
+    <div class="form-group">
+      <label for="hospital">Hospital:</label>
+      <input type="text" id="hospital" name="hospital">
+    </div>
+    <div class="form-group">
+      <label for="bookingDate">Date:</label>
+      <input type="date" id="bookingDate" name="bookingDate">
+    </div>
+    <div class="form-group">
+      <label for="bookingHour">Hour:</label>
+      <select id="bookingHour" name="bookingHour">
+        <option value="9">9 AM</option>
+        <option value="10">10 AM</option>
+        <option value="11">11 AM</option>
+        <!-- Add more options for hours -->
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="bookingMinute">Minute:</label>
+      <select id="bookingMinute" name="bookingMinute">
+        <option value="0">00</option>
+        <option value="15">15</option>
+        <option value="30">30</option>
+        <option value="45">45</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <button type="button" class="btn btn-primary" onclick="bookAppointment()">Book</button>
+    </div>
+  </form>
+
+  <script>
+    const bookedAppointments = JSON.parse(localStorage.getItem('bookedAppointments')) || [];
+
+    function isAppointmentBooked(date, hospital) {
+      return bookedAppointments.some(appointment => appointment.date === date && appointment.hospital === hospital);
+    }
+
+    function bookAppointment() {
+      const insuranceNumber = document.getElementById('insuranceNumber').value;
+      const hospital = document.getElementById('hospital').value;
+      const date = document.getElementById('bookingDate').value;
+      const hour = document.getElementById('bookingHour').value;
+      const minute = document.getElementById('bookingMinute').value;
+
+      const selectedDateTime = new Date(date);
+      selectedDateTime.setHours(hour, minute, 0, 0);
+
+      if (insuranceNumber && hospital && date) {
+        if (isAppointmentBooked(date, hospital)) {
+          alert('This date and hospital are already booked. Please choose another date or hospital.');
+        } else {
+          const appointment = {
+            insuranceNumber,
+            hospital,
+            date: date,
+            time: selectedDateTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+          };
+
+          bookedAppointments.push(appointment);
+          localStorage.setItem('bookedAppointments', JSON.stringify(bookedAppointments));
+
+          alert('Appointment booked successfully.');
+
+          // Reset the form
+          document.getElementById('bookingForm').reset();
+        }
+      } else {
+        alert('Please enter all required information.');
+      }
+    }
+  </script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Booking Page</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #fff;
+      padding: 20px;
+      text-align: center;
+      position: relative;
+    }
+
+    h2 {
+      margin-bottom: 30px;
+      color: #084a28;
+      background: linear-gradient(to right, #001f3f, #87CEEB);
+      padding: 10px;
+      border-radius: 10px;
+      animation: gradientAnimation 5s infinite;
+      background-size: 200% 200%;
+    }
+
+    @keyframes gradientAnimation {
+      0% {
+        background-position: 0% 50%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+
+    form {
+      margin-top: 30px;
+    }
+
+    .form-group {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 15px;
+    }
+
+    .form-group label {
+      width: 120px;
+      text-align: right;
+      margin-right: 15px;
+      font-weight: bold;
+    }
+
+    .form-group select {
+      flex-grow: 1;
+      padding: 5px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    .btn {
+      padding: 8px 20px;
+      font-size: 16px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      margin-right: 10px;
+    }
+
+    .btn-primary {
+      background-color: #001f3f;
+      color: #fff;
+      border: none;
+    }
+
+    .btn-primary:hover {
+      background-color: #87CEEB;
+    }
+
+    .booking-calendar {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 30px;
+    }
+
+    .day {
+      padding: 10px;
+      margin: 5px;
+      cursor: pointer;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
+    }
+
+    .day.selected {
+      background-color: #87CEEB;
+      color: #fff;
+    }
+
+    .day.disabled {
+      background-color: #ccc;
+      color: #888;
+      cursor: not-allowed;
+    }
+  </style>
+</head>
+<body>
+  <h2>Booking Page</h2>
+
+  <!-- Booking form -->
+  <form id="bookingForm">
+    <div class="form-group">
+      <label for="insuranceNumber">Patient Insurance Number:</label>
+      <input type="text" id="insuranceNumber" name="insuranceNumber">
+    </div>
+    <div class="form-group">
+      <label for="hospital">Hospital Name:</label>
+      <input type="text" id="hospital" name="hospital">
+    </div>
+    <div class="form-group">
+      <label for="bookingDate">Date:</label>
+      <input type="date" id="bookingDate" name="bookingDate">
+    </div>
+    <div class="form-group">
+      <label for="bookingHour">Hour:</label>
+      <select id="bookingHour" name="bookingHour">
+        <option value="9">9 AM</option>
+        <option value="10">10 AM</option>
+        <option value="11">11 AM</option>
+        <option value="12">12 AM</option>
+        <option value="13">13 AM</option>
+        <option value="14">14 AM</option>
+        <option value="15">15 AM</option>
+        <option value="16">16 AM</option>
+        <option value="17">17 AM</option>
+        <option value="18">18 AM</option>
+
+        <!-- Add more options for hours -->
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="bookingMinute">Minute:</label>
+      <select id="bookingMinute" name="bookingMinute">
+        <option value="0">00</option>
+        <option value="15">15</option>
+        <option value="30">30</option>
+        <option value="45">45</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <button type="button" class="btn btn-primary" onclick="bookAppointment()">Book</button>
+    </div>
+  </form>
+
+  <script>
+    const bookedAppointment = JSON.parse(localStorage.getItem('bookedAppointments')) || [];
+
+    function isAppointmentBooked(date, hospital) {
+      return bookedAppointments.some(appointment => appointment.date === date && appointment.hospital === hospital);
+    }
+
+    function bookAppointment() {
+      const insuranceNumber = document.getElementById('insuranceNumber').value;
+      const hospital = document.getElementById('hospital').value;
+      const date = document.getElementById('bookingDate').value;
+      const hour = document.getElementById('bookingHour').value;
+      const minute = document.getElementById('bookingMinute').value;
+
+      const selectedDateTime = new Date(date);
+      selectedDateTime.setHours(hour, minute, 0, 0);
+
+      if (insuranceNumber && hospital && date) {
+        if (isAppointmentBooked(date, hospital)) {
+          alert('This date and hospital are already booked. Please choose another date or hospital.');
+        } else {
+          const appointment = {
+            insuranceNumber,
+            hospital,
+            date: date,
+            time: selectedDateTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+          };
+
+          bookedAppointments.push(appointment);
+          localStorage.setItem('bookedAppointments', JSON.stringify(bookedAppointments));
+
+          alert('Appointment booked successfully.');
+
+          // Reset the form
+          document.getElementById('bookingForm').reset();
+        }
+      } else {
+        alert('Please enter all required information.');
+      }
+    }
+  </script>
+</body>
+</html>

@@ -56,6 +56,13 @@
     button:hover {
       background-color: #87CEEB;
     }
+
+    .logout-button {
+      position: absolute;
+      bottom: 20px;
+      right: 20px;
+      background-color: red;
+    }
   </style>
 </head>
 <body>
@@ -65,14 +72,15 @@
     <h3>Doctor Information:</h3>
     <p><strong>Name:</strong> <span id="name-placeholder"></span></p>
     <p><strong>Doctor ID:</strong> <span id="doctor-id-placeholder"></span></p>
-    <button onclick="logOut()">Log Out</button>
-</div>
+  </div>
   <!-- Doctor options -->
   <div>
     <h3>View:</h3>
     <button onclick="goToPatients()">My Patients</button>
     <button onclick="goToAppointments()">My Appointments</button>
   </div>
+  <!-- Logout button -->
+  <button class="logout-button" onclick="logOut()">Log Out</button>
 
   <script>
     // Function to retrieve stored values from localStorage
@@ -82,20 +90,18 @@
 
     // Function to navigate to "my patients" page
     function goToPatients() {
-      // Add your logic for navigating to the "my patients" page
-      window.location.href = 'doctor_patients.html';
+      // Navigating to the "my patients" page
+      window.location.href = 'doctor_mypatients.html';
     }
 
     // Function to navigate to "my appointments" page
     function goToAppointments() {
-      // Add your logic for navigating to the "my appointments" page
+      // Navigating to the "my appointments" page
       window.location.href = 'doctor_appointments.html';
     }
-     // Function to log out and navigate to "index.html" page
-     function logOut() {
-      // Add your logic for logging out
-      console.log("Logging out");
 
+    // Function to log out and navigate to "index.html" page
+    function logOut() {
       // Redirect to index.html
       window.location.href = 'index.html';
     }
