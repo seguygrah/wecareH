@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Head contents -->
+</head>
+<body>
+  <h2>Welcome to the Patient Hospitals Page</h2>
+
+  <!-- Patient information -->
+  <div>
+    <h3>Patient Information:</h3>
+    <p><strong>Name:</strong> <span id="name-placeholder"></span></p>
+    <p><strong>Insurance Number:</strong> <span id="insurance-number-placeholder"></span></p>
+  </div>
+
+  <!-- Hospitals list -->
+  <div>
+    <h3>Hospitals:</h3>
+    <ul id="hospitals-list"></ul>
+  </div>
+
+  <!-- Back button -->
+  <div>
+    <button onclick="goBack()">Back</button>
+  </div>
+
+  <script>
+    // Function to retrieve stored values from localStorage
+    function getStoredValue(key) {
+      return localStorage.getItem(key);
+    }
+
+    // Function to display the patient's name and insurance number
+    function displayPatientInfo() {
+      const name = getStoredValue('name');
+      const insuranceNumber = getStoredValue('insuranceNumber');
+
+      // Display the values in the appropriate elements
+      document.getElementById('name-placeholder').textContent = name;
+      document.getElementById('insurance-number-placeholder').textContent = insuranceNumber;
+    }
+
+    // Function to fetch the hospitals data from the JSON file
+    function fetchHospitalsData() {
+      fetch('hospitals.json')
+        .then(response => response.json())
+        .then(data => {
+          const insuranceNumber = getStoredValue('insuranceNumber');
+          const hospitalsList = document.getElementById('hospitals-list');
+
+          // Filter hospitals based on insurance number
+          const filteredHospitals = data.filter(hospital => hospital.insuranceNos.includes(insuranceNumber));
+
+          // Display the list of hospitals
+          filteredHospitals.forEach(hospital => {
+            const listItem = document.createElement('li');
+            listItem.textContent = hospital.name;
+            hospitalsList.appendChild(listItem);
+          });
+        })
+        .catch(error => {
+          console.log('Error fetching hospitals data:', error);
+        });
+    }
+
+    // Function to navigate back to the patient page
+    function goBack() {
+      // Redirect to patient_page.html
+      window.location.href = 'patient_page.html';
+    }
+
+    // Function to initialize the page
+    function initializePage() {
+      displayPatientInfo();
+      fetchHospitalsData();
+    }
+
+    // Call the initialization function when the page loads
+    document.addEventListener('DOMContentLoaded', initializePage);
+  </script>
+</body>
+</html>

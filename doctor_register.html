@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Doctor Registration</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #fff;
+      padding: 20px;
+      text-align: center;
+      position: relative;
+    }
+
+    h2 {
+      margin-bottom: 30px;
+      color: #084a28;
+      background: linear-gradient(to right, #001f3f, #87CEEB);
+      padding: 10px;
+      border-radius: 10px;
+      animation: gradientAnimation 5s infinite;
+      background-size: 200% 200%;
+    }
+
+    @keyframes gradientAnimation {
+      0% {
+        background-position: 0% 50%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+
+    label {
+      display: block;
+      margin-bottom: 10px;
+      color: #491010;
+      font-weight: bold;
+      text-align: left;
+    }
+
+    input[type="text"],
+    input[type="password"] {
+      width: 100%;
+      padding: 10px;
+      font-size: 16px;
+      margin-bottom: 20px;
+      border-radius: 10px;
+      box-sizing: border-box;
+    }
+
+    button[type="submit"],
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #001f3f;
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button[type="submit"]:hover,
+    button:hover {
+      background-color: #87CEEB;
+    }
+  </style>
+</head>
+<body>
+  <h2>Doctor Registration</h2>
+
+  <!-- Registration form -->
+  <form id="registration-form" onsubmit="handleSubmit(event)">
+    <label for="doctor-id">Doctor ID:</label>
+    <input type="text" id="doctor-id" name="doctor-id" required>
+    <br><br>
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" required>
+    <br><br>
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password" required>
+    <br><br>
+    <button type="submit">Register</button>
+  </form>
+
+  <!-- Go back button -->
+  <button onclick="goBack()">Go Back</button>
+
+  <script>
+    // Function to go back to the previous page (index.html)
+    function goBack() {
+      window.history.back();
+    }
+
+    // Function to handle form submission
+    function handleSubmit(event) {
+      event.preventDefault(); // Prevent form submission from reloading the page
+
+      // Get form field values
+      const doctorId = document.getElementById('doctor-id').value;
+      const name = document.getElementById('name').value;
+      const password = document.getElementById('password').value;
+
+      // Store the values in localStorage
+      localStorage.setItem('doctorId', doctorId);
+      localStorage.setItem('name', name);
+      localStorage.setItem('password', password);
+
+      // Redirect to doctor_page.html
+      window.location.href = `doctor_page.html?doctorId=${doctorId}&name=${name}`;
+    }
+  </script>
+</body>
+</html>
