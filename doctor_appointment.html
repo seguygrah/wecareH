@@ -132,7 +132,7 @@ button:hover {
 
       // Filter appointments based on the provided doctor ID and hospital name
       const filteredAppointments = bookedAppointments.filter(appointment =>
-         appointment.hospital === hospitalName
+        appointment.hospital === hospitalName
       );
 
       // Display the filtered appointments
@@ -144,7 +144,7 @@ button:hover {
 
         filteredAppointments.forEach(appointment => {
           const li = document.createElement('li');
-          li.textContent = `Time: ${appointment.time}, Insurance Number: ${appointment.insuranceNumber}`;
+          li.textContent = `Date: ${appointment.date}, Time: ${appointment.time}, Insurance Number: ${appointment.insuranceNumber}`;
           ul.appendChild(li);
         });
 
@@ -155,8 +155,8 @@ button:hover {
     }
 
     function goBack() {
-        window.location.href = "doctor_page.html";
-  }
+      window.location.href = "doctor_page.html";
+    }
   </script>
 </body>
 </html>

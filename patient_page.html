@@ -83,11 +83,11 @@
   </div>
   <!-- Logout button -->
   <button class="logout-button" onclick="logOut()">Log Out</button>
- <!-- DIsplay Appointments section -->
- <div>
-  <h3>Your Appointments:</h3>
-  <ul id="appointments-list"></ul>
-</div>
+  <!-- Display Appointments section -->
+  <div>
+    <h3>Your Appointments:</h3>
+    <ul id="appointments-list"></ul>
+  </div>
 
   <script>
     // Function to retrieve stored values from localStorage
@@ -124,27 +124,27 @@
 
     // Retrieve the stored values and display them
     document.addEventListener('DOMContentLoaded', function() {
-      const name = getStoredValue('name');
+      const name = getStoredValue('PatName');
       const insuranceNumber = getStoredValue('insuranceNumber');
 
       // Display the values in the appropriate elements
       document.getElementById('name-placeholder').textContent = name;
       document.getElementById('insurance-number-placeholder').textContent = insuranceNumber;
-    // Retrieve booked appointments from local storage
-    const bookedAppointments = JSON.parse(localStorage.getItem('bookedAppointments')) || [];
+    
+      // Retrieve booked appointments from local storage
+      const bookedAppointments = JSON.parse(localStorage.getItem('bookedAppointments')) || [];
 
-// Filter the appointments for the current user based on insurance number
-const userAppointments = bookedAppointments.filter(appointment => appointment.insuranceNumber === insuranceNumber);
+      // Filter the appointments for the current user based on insurance number
+      const userAppointments = bookedAppointments.filter(appointment => appointment.insuranceNumber === insuranceNumber);
 
-// Create list items for each appointment and append them to the appointments list
-const appointmentsList = document.getElementById('appointments-list');
-userAppointments.forEach(appointment => {
-  const listItem = document.createElement('li');
-  listItem.textContent = `Hospital: ${appointment.hospital}, Date: ${appointment.date}, Time: ${appointment.time}`;
-  appointmentsList.appendChild(listItem);
-});
+      // Create list items for each appointment and append them to the appointments list
+      const appointmentsList = document.getElementById('appointments-list');
+      userAppointments.forEach(appointment => {
+        const listItem = document.createElement('li');
+        listItem.textContent = `Hospital: ${appointment.hospital}, Date: ${appointment.date}, Time: ${appointment.time}`;
+        appointmentsList.appendChild(listItem);
+      });
     });
-
   </script>
 </body>
 </html>

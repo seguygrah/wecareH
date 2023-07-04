@@ -86,8 +86,8 @@
     <label for="doctor-id">Doctor ID:</label>
     <input type="text" id="doctor-id" name="doctor-id" required>
     <br><br>
-    <label for="name">Name:</label>
-    <input type="text" id="name" name="name" required>
+    <label for="docName">Name:</label>
+    <input type="text" id="docName" name="docName" required>
     <br><br>
     <label for="password">Password:</label>
     <input type="password" id="password" name="password" required>
@@ -110,12 +110,12 @@
 
       // Get form field values
       const doctorId = document.getElementById('doctor-id').value;
-      const name = document.getElementById('name').value;
+      const name = document.getElementById('docName').value;
       const password = document.getElementById('password').value;
 
       // Store the values in localStorage
       localStorage.setItem('doctorId', doctorId);
-      localStorage.setItem('name', name);
+      localStorage.setItem('docName', name);
       localStorage.setItem('password', password);
 
       // Redirect to doctor_page.html

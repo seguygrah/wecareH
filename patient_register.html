@@ -88,8 +88,8 @@
 
   <!-- Registration form -->
   <form id="registration-form" onsubmit="handleSubmit(event)">
-    <label for="name">Name:</label>
-    <input type="text" id="name" name="name" required>
+    <label for="PatName">Name:</label>
+    <input type="text" id="PatName" name="PatName" required>
     <br><br>
     <label for="insurance-number">Insurance Number:</label>
     <input type="text" id="insurance-number" name="insurance-number" required>
@@ -122,12 +122,12 @@
       event.preventDefault(); // Prevent form submission from reloading the page
    
       // Get form field values
-      const name = document.getElementById('name').value;
+      const name = document.getElementById('PatName').value;
       const insuranceNumber = document.getElementById('insurance-number').value;
       const password = document.getElementById('password').value;
 
      // Store the values in localStorage
-      localStorage.setItem('name', name);
+      localStorage.setItem('PatName', name);
       localStorage.setItem('insuranceNumber', insuranceNumber);
       localStorage.setItem('password', password);
      
