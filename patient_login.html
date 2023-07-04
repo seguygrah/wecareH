@@ -5,7 +5,78 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Patient Log In Page</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-  <script src="https://cdn.jsdelivr.net/npm/vue@2.7.8/dist/vue.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #fff; /* Updated background color to white */
+      padding: 20px;
+      text-align: center;
+      position: relative;
+    }
+
+    h2 {
+      margin-bottom: 30px;
+      color: #084a28;
+      background: linear-gradient(to right, #001f3f, #87CEEB);
+      padding: 10px;
+      border-radius: 10px;
+      animation: gradientAnimation 5s infinite;
+      background-size: 200% 200%;
+    }
+
+    @keyframes gradientAnimation {
+      0% {
+        background-position: 0% 50%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+
+    label {
+      display: block;
+      margin-bottom: 10px;
+      color: #491010;
+      font-weight: bold;
+      text-align: left;
+    }
+
+    input[type="text"],
+    input[type="password"] {
+      width: 100%;
+      padding: 10px;
+      font-size: 16px;
+      margin-bottom: 20px;
+      border-radius: 10px;
+      box-sizing: border-box;
+    }
+
+    button[type="submit"],
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #001f3f;
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button[type="submit"]:hover,
+    button:hover {
+      background-color: #87CEEB;
+    }
+
+    .button-container {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 20px;
+    }
+  </style>
 </head>
 <body>
   <h2>Patient Log In Page</h2>
@@ -18,8 +89,10 @@
     <label for="password">Password:</label>
     <input type="password" id="password" name="password" required>
     <br>
-    <button type="submit">Log in</button>
-    <button onclick="goBack()">Go back</button>
+    <div class="button-container">
+      <button type="submit">Log in</button>
+      <button onclick="goBack()">Go back</button>
+    </div>
   </form>
 
   <script>

@@ -75,6 +75,12 @@
     button:hover {
       background-color: #87CEEB;
     }
+
+    .button-container {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 20px;
+    }
   </style>
 </head>
 <body>
@@ -99,11 +105,11 @@
     <label for="password">Password:</label>
     <input type="password" id="password" name="password" required>
     <br><br>
-    <button type="submit">Register</button>
+    <div class="button-container">
+      <button type="submit">Register</button>
+      <button onclick="goBack()">Go Back</button>
+    </div>
   </form>
-
-  <!-- Go back button -->
-  <button onclick="goBack()">Go Back</button>
 
   <script>
     // Function to go back to the previous page (index.html)

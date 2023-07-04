@@ -62,14 +62,18 @@
       text-align: right;
       margin-right: 15px;
       font-weight: bold;
+      display: inline-block;
+      vertical-align: middle;
     }
 
-    /* Select input styles */
+    /* Input styles */
+    .form-group input[type="text"],
+    .form-group input[type="date"],
     .form-group select {
-      flex-grow: 1;
       padding: 5px;
       border-radius: 5px;
       border: 1px solid #ccc;
+      width: 200px;
     }
 
     /* Button styles */
@@ -79,7 +83,7 @@
       border-radius: 10px;
       cursor: pointer;
       transition: background-color 0.3s ease;
-      margin-right: 10px;
+      margin: 5px;
     }
 
     /* Primary button styles */
@@ -123,11 +127,17 @@
       color: #888;
       cursor: not-allowed;
     }
+
+    /* Appointment details styles */
+    .appointment-details {
+      margin-top: 30px;
+      font-weight: bold;
+    }
   </style>
 </head>
 <body>
   <!-- Heading -->
-  <h2>Booking Page</h2>
+  <h2>Book an Appointment</h2>
 
   <!-- Booking form -->
   <form id="bookingForm">
@@ -149,6 +159,13 @@
         <option value="9">9 AM</option>
         <option value="10">10 AM</option>
         <option value="11">11 AM</option>
+        <option value="12">12 PM</option>
+        <option value="13">1 PM</option>
+        <option value="14">2 PM</option>
+        <option value="15">3 PM</option>
+        <option value="16">4 PM</option>
+        <option value="17">5 PM</option>
+        <option value="18">6 PM</option>
         <!-- Add more options for hours -->
       </select>
     </div>
@@ -162,13 +179,16 @@
       </select>
     </div>
     <div class="form-group">
-      <!-- Back button -->
-      <button type="button" class="btn btn-primary" onclick="goBack()">Back</button>
-      
       <!-- Book button -->
-      <button type="button" class="btn btn-primary" onclick="bookAppointment()">Book</button>
+      <button type="button" class="btn btn-primary float-start" onclick="bookAppointment()">Book</button>
+      
+      <!-- Back button -->
+      <button type="button" class="btn btn-primary float-end" onclick="goBack()">Back</button>
     </div>
   </form>
+
+  <!-- Appointment details -->
+  <div id="appointmentDetails" class="appointment-details"></div>
 
   <!-- JavaScript code -->
   <script>
@@ -209,6 +229,10 @@
 
           bookedAppointments.push(appointment);
           localStorage.setItem('bookedAppointments', JSON.stringify(bookedAppointments));
+
+          // Display the appointment details
+          const appointmentDetails = document.getElementById('appointmentDetails');
+          appointmentDetails.innerHTML = `Appointment booked:<br>Insurance Number: ${appointment.insuranceNumber}<br>Hospital: ${appointment.hospital}<br>Date: ${appointment.date}<br>Time: ${appointment.time}`;
 
           alert('Appointment booked successfully.');
 

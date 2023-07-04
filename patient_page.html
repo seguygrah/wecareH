@@ -8,7 +8,7 @@
   <style>
     body {
       font-family: Arial, sans-serif;
-      background-color: #fff; 
+      background-color: #fff;
       padding: 20px;
       text-align: center;
       position: relative;
@@ -56,24 +56,38 @@
     button:hover {
       background-color: #87CEEB;
     }
+
+    .logout-button {
+      position: absolute;
+      bottom: 20px;
+      right: 20px;
+      background-color: red;
+      color: #fff;
+    }
   </style>
 </head>
 <body>
   <h2>Welcome to the Patient Page</h2>
-<!-- Patient information -->
-<div>
-  <h3>Your Information:</h3>
-  <p><strong>Name:</strong> <span id="name-placeholder"></span></p>
-  <p><strong>Insurance Number:</strong> <span id="insurance-number-placeholder"></span></p>
-</div>
+  <!-- Patient information -->
+  <div>
+    <h3>Your Information:</h3>
+    <p><strong>Name:</strong> <span id="name-placeholder"></span></p>
+    <p><strong>Insurance Number:</strong> <span id="insurance-number-placeholder"></span></p>
+  </div>
   <!-- Patient options -->
   <div>
     <h3>View:</h3>
     <button onclick="goToHospitals()">My Hospitals</button>
     <button onclick="goToMedicalRecords()">My Medical Records</button>
     <button onclick="goToAppointmentBooking()">Book Appointment</button>
-    <button onclick="logOut()">Log Out</button>
   </div>
+  <!-- Logout button -->
+  <button class="logout-button" onclick="logOut()">Log Out</button>
+ <!-- DIsplay Appointments section -->
+ <div>
+  <h3>Your Appointments:</h3>
+  <ul id="appointments-list"></ul>
+</div>
 
   <script>
     // Function to retrieve stored values from localStorage
@@ -95,13 +109,13 @@
 
     // Function to navigate to "book appointment" page
     function goToAppointmentBooking() {
-      //navigating to the "book appointment" page
+      // Navigating to the "book appointment" page
       window.location.href = 'patient_appointment.html';
     }
 
     // Function to log out and navigate to "index.html" page
     function logOut() {
-      //logging out
+      // Logging out
       console.log("Logging out");
 
       // Redirect to index.html
@@ -116,6 +130,19 @@
       // Display the values in the appropriate elements
       document.getElementById('name-placeholder').textContent = name;
       document.getElementById('insurance-number-placeholder').textContent = insuranceNumber;
+    // Retrieve booked appointments from local storage
+    const bookedAppointments = JSON.parse(localStorage.getItem('bookedAppointments')) || [];
+
+// Filter the appointments for the current user based on insurance number
+const userAppointments = bookedAppointments.filter(appointment => appointment.insuranceNumber === insuranceNumber);
+
+// Create list items for each appointment and append them to the appointments list
+const appointmentsList = document.getElementById('appointments-list');
+userAppointments.forEach(appointment => {
+  const listItem = document.createElement('li');
+  listItem.textContent = `Hospital: ${appointment.hospital}, Date: ${appointment.date}, Time: ${appointment.time}`;
+  appointmentsList.appendChild(listItem);
+});
     });
 
   </script>
